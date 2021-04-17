@@ -1,15 +1,13 @@
 import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { click, render } from '@ember/test-helpers';
-import { hbs } from 'ember-cli-htmlbars';
+import { visit, currentURL } from '@ember/test-helpers';
+import { setupApplicationTest } from 'ember-qunit';
+import { click } from '@ember/test-helpers';
 
-module('Integration | Component | user-status', function (hooks) {
-  setupRenderingTest(hooks);
+module('Acceptance | user status', function(hooks) {
+  setupApplicationTest(hooks);
 
-  test('Should show I am doing a task', async function (assert) {
-    await render(hbs`
-      <user-status />
-    `);
+  test('visiting /user-status', async function(assert) {
+    await visit('/user-status');
 
     assert
       .dom('[data-test-status]')
@@ -34,5 +32,7 @@ module('Integration | Component | user-status', function (hooks) {
         'Change status to ‘Idle’',
         'The user sees the correct button text.'
       );
+
+    assert.equal(currentURL(), '/user-status');
   });
 });
