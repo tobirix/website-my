@@ -7,6 +7,9 @@ export default class SignupRoute extends Route {
       credentials: 'include',
     });
     const userData = await response.json();
+    if (response.status >= 500 && response.status < 600) {
+      alert('Our system is seems to be having some troubles, please check sometime later!');
+    }
     if (response.status === 401) {
       alert('You have not logged in. Please login first to fill this form.');
       window.open(
